@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <h1 class="title_text">The Endless Whyme</h1>
+  <p class="title_sub_text">~why meを探す終わりなき旅~</p>
+  <div class="wrapper">
+    <p class="title_image"></p>
+    <div class="wrapper_2">
+      <div class="content">
+        <!-- <p class="content_item codama">児玉さん</p> -->
+        <div class="content_item chat">
+          <div id="line" class="line-bc">
+
+            <!--児玉さん会話-->
+            <div class="kodama_line">
+              <div class="faceicon">
+                <img src="images/icon_codama_1.png" alt="">
+              </div>
+              <div class="chatting">
+                <div class="says">
+                  <p>あなたはたった一度の人生をどう生きたい？</p>
+                </div>
+              </div>
+            </div>
+            <!--児玉さん会話-->
+
+            <!--自分会話-->
+            <!-- <div class="my_line">
+              <div class="faceicon">
+                <img src="images/icon_masa_1.png" alt="">
+              </div>
+              <div class="chatting">
+                <div class="says">
+                  <p>このように生きたいです。</p>
+                </div>
+              </div>
+            </div> -->
+            <!--自分会話-->
+
+
+            <!--/右コメント-->
+          </div>
+
+        </div>
+
+
+        <!-- <p class="content_item me">プレイヤー</p> -->
+      </div>
+      <div class="wish_wrapper">
+        <div class="wish_box">
+          <textarea class="wish_input_area" id="text_area"></textarea>
+          <ul class="wish_button">
+            <p class="do_wish" id="send">送信する</p>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "",
+      authDomain: "chat-app-b32ce.firebaseapp.com",
+      projectId: "chat-app-b32ce",
+      storageBucket: "chat-app-b32ce.appspot.com",
+      messagingSenderId: "690664538811",
+      appId: "1:690664538811:web:1efe52a4add05b2f9d1f9e"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    const db = firebase.firestore().collection("whyme4");
+
+
+    $("#send").on("click", function () {
+      const data = {
+        text: $('#text_area').val(),
+        time: firebase.firestore.FieldValue.serverTimestamp()
+      }
+      console.log(data);
+      db.add(data);
+      $('#text_area').val('');
+    });
+
+    db.onSnapshot(function (querySnapshot) {
+      // onSnapshotでcloud firestoreのデータ変更時に実行される！
+      // querySnapshot.docsにcloud firestoreのデータが配列形式で入る
+      const dataArray = []; // 必要なデータだけが入った新しい配列を作成
+      querySnapshot.docs.forEach(function (doc) {
+        const data = {
+          id: doc.id,
+          data: doc.data(),
+          time: doc.data().time
+        }
+        dataArray.push(data);
+        console.log(doc.data().time);
+      });
+      console.log(dataArray);
+
+      dataArray.sort(function (a, b) {
+
+        return a.time < b.time ? -1 : 1;
+
+      });
+      console.log(dataArray);
+
+
+      console.log(querySnapshot.docs);
+
+      const tagArray0 = []; // `dataArray`は前回出てきたオブジェクトの配列
+      const tagArray = []; // `dataArray`は前回出てきたオブジェクトの配列
+      const tagArray2 = []; // `dataArray`は前回出てきたオブジェクトの配列
+
+
+
+      dataArray.forEach(function (data) {
+
+        let a = data.data.name;
+        tagArray.push(`
+
+        <div class="my_line">
+        <div class="faceicon">
+        <img src="images/icon_masa_1.png" alt="">
+        </div>
+        <div class="chatting">
+        <div class="says">
+        <p>${data.data.text}</p>
+        </div>
+        </div>
+        </div>
+
+        <div class="kodama_line">
+        <div class="faceicon">
+        <img src="images/icon_codama_1.png" alt="">
+        </div>
+        <div class="chatting">
+        <div class="says">
+        <p>それはなぜ？</p>
+        </div>
+        </div>
+        </div>`)
+      })
+
+
+      $('.line-bc').html(tagArray);
+      let omedetou = 'おめでとうございます。ここまで深め切ったWhymeはとても純度が高いものになったことでしょう。';
+      if (dataArray.length > 10) {
+        var result = $('.kodama_line:last-child').find("p").text(omedetou);
+        let kodama_comment = '<div class="kodama_line">'
+          + '<div class="faceicon">'
+          + '<img src="images/icon_codama_1.png" alt="">'
+          + '</div>'
+          + '<div class="chatting">'
+          + '<div class="says">'
+          + '<p>ご褒美にこちらを差し上げます。</p>'
+          + '<img src="images/aojiru.jpeg" alt="" width="200px" style="margin:20px">'
+          + '</div>'
+          + '</div>'
+          + '</div>'
+        document.getElementById('line').insertAdjacentHTML("beforeend", kodama_comment);
+
+        let kodama_comment2 = '<div class="kodama_line">'
+          + '<div class="faceicon">'
+          + '<img src="images/icon_codama_1.png" alt="">'
+          + '</div>'
+          + '<div class="chatting">'
+          + '<div class="says">'
+          + '<p>これまで送られてきた「ミツコの青汁です」</p>'
+          + '</div>'
+          + '</div>'
+          + '</div>'
+        document.getElementById('line').insertAdjacentHTML("beforeend", kodama_comment2);
+
+      }
+
+
+    });
+
+
+
+
+
+        // 送信ボタンを押した時
+        // let comment_input = $('#text_area').val();
+    // $('#send').on('click', function () {
+    //   let my_comment = '<div class="my_line">'
+    //     + '<div class="faceicon">'
+    //     + '<img src="images/icon_masa_1.png" alt="">'
+    //     + '</div>'
+    //     + '<div class="chatting">'
+    //     + '<div class="says">'
+    //     + '<p>このように生きたいです。</p>'
+    //     + '</div>'
+    //     + '</div>'
+    //     + '</div>'
+    //   document.getElementById('line').insertAdjacentHTML("beforeend", my_comment);
+
+    //   setTimeout(function () {
+
+    //     let kodama_comment = '<div class="kodama_line">'
+    //       + '<div class="faceicon">'
+    //       + '<img src="images/icon_codama_1.png" alt="">'
+    //       + '</div>'
+    //       + '<div class="chatting">'
+    //       + '<div class="says">'
+    //       + '<p>それはなぜ？</p>'
+    //       + '</div>'
+    //       + '</div>'
+    //       + '</div>'
+    //     document.getElementById('line').insertAdjacentHTML("beforeend", kodama_comment);
+
+    //   }, 2000);
+    //   console.log(comment_input);
+
+    // });
+
+  </script>
+  <script>
+    // 日時をいい感じの形式にする関数
+    function convertFromFirestoreTimestampToDatetime(timestamp) {
+      const _d = timestamp ? new Date(timestamp * 1000) : new Date();
+      const Y = _d.getFullYear();
+      const m = (_d.getMonth() + 1).toString().padStart(2, '0');
+      const d = _d.getDate().toString().padStart(2, '0');
+      const H = _d.getHours().toString().padStart(2, '0');
+      const i = _d.getMinutes().toString().padStart(2, '0');
+      const s = _d.getSeconds().toString().padStart(2, '0');
+      return `${Y}/${m}/${d} ${H}:${i}:${s}`;
+    }
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+body {
+  background-image: url(../images/gs3.jpeg);
+  background-size: cover;
+  background-position: -80px 0;
+}
+/* タイトル */
+
+
+.title_text {
+  font-weight: bold;
+  font-size: 48px;
+  text-align: center;
+  margin-top: 50px ;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.title_sub_text {
+  font-weight: bold;
+  font-size:24px;
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.wrapper {
+  width: 1080px;
+  margin: auto;
+  background-color: rgba(255,255,255,.5);
+  margin-bottom: 100px;
+}
+.wrapper_2 {
+  width: 960px;
+  margin: 0 auto ;
+  padding-bottom: 50px;
+}
+
+/* チャット */
+
+.content {
+display: flex;
+justify-content: center;
+margin-top: 50px;
+}
+
+
+.title_image {
+  height: 300px;
+  overflow: hidden;
+  background-image: url(../images/kodama5.jpeg);
+  background-size: cover;
+}
+.content_item {
+  width: 400px;
+  overflow: hidden;
+}
+
+.chat {
+  width: 600px;
+  height: 600px;
+  background-color: rgba(187,219,243,.6);
+}
+
+.codama {
+  background-color: red;
+}
+
+.me {
+  background-color: red;
+}
+
+/* 吹き出し */
+
+.line-bc {
+  padding: 20px 10px;
+  margin: 15px auto;
+  text-align: right;
+  font-size: 14px;
+  overflow: scroll;
+  height: 550px;
+}
+
+/*児玉ライン*/
+.kodama_line {
+  width: 100%;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.kodama_line .faceicon {
+  float: left;
+  margin-right: -50px;
+  width: 60px;
+}
+
+.kodama_line .faceicon img{
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+.kodama_line .chatting {
+  width: 100%;
+  text-align: left;
+}
+.kodama_line .says {
+  display: inline-block;
+  position: relative;
+  margin: 0 0 0 70px;
+  padding: 10px;
+  max-width: 250px;
+  border-radius: 12px;
+  background: #edf1ee;
+}
+
+.kodama_line .says:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 3px;
+  left: -19px;
+  border: 8px solid transparent;
+  border-right: 18px solid #edf1ee;
+  -webkit-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
+.says p {
+  margin: 0;
+  padding: 0;
+}
+
+
+/*マイライン*/
+
+.my_line {
+  width: 100%;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.my_line .faceicon {
+  float: right;
+  margin-right: 0px;
+  width: 60px;
+}
+
+.my_line .faceicon img{
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+.my_line .chatting {
+  width: 100%;
+  text-align: right;
+}
+.my_line .says {
+  display: inline-block;
+  position: relative;
+  margin-left: 230px;
+  padding: 10px;
+  max-width: 250px;
+  border-radius: 12px;
+  background: skyblue;
+  text-align: left;
+}
+
+.says p {
+  margin: 0;
+  padding: 0;
+}
+
+/* 入力フォーム */
+
+.wish_wrapper {
+  text-align: center;
+}
+
+ #input {
+   width: 80%;
+ }
+
+
+.wish_input_area {
+  margin-top: 50px;
+   margin-bottom: 20px;
+   width: 60%;
+   min-height: 80px;
+}
+
+.wish_button {
+  display: flex;
+  justify-content: space-around;
+  width: 250px;
+  margin: 0 auto;
+}
+
+.do_wish {
+  padding:.5em;
+  border: 1px solid #000;
+}
+
+.do_wish:hover {
+  background-color: #000;
+  color:#fff;
+}
+
+.cansell_wish {
+  padding:.5em;
+  border: 1px solid #000;
+}
+
+.cansell_wish:hover {
+  background-color: #000;
+  color:#fff;
+}
