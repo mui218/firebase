@@ -26,3 +26,4 @@ Whymeを無限に深掘りしていくためのツール。
   大幅に提出が遅れてしまった。この点は特に反省。
 
 ## デプロイURL
+ https://mui218.github.io/firebase/
